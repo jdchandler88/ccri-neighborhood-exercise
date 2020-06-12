@@ -28,12 +28,7 @@ public final class CellCounter {
                     //count number of neighbors within distance
                     for (int xSearch = (x-neighborDistance); xSearch <= x+neighborDistance; xSearch++) {
                         for (int ySearch = (y-neighborDistance); ySearch <= y+neighborDistance; ySearch++) {
-
-                            //make sure that the cell is within manhattan distance
-                            int xDist = Math.abs(xSearch - x);
-                            int yDist = Math.abs(ySearch - y);
-
-                            if (xDist + yDist <= neighborDistance) {
+                            if (isWithinManhattanDistance(x, y, xSearch, ySearch, neighborDistance)) {
                                 count++;
                             }
                         }
@@ -45,6 +40,12 @@ public final class CellCounter {
         }
 
         return count;
+    }
+
+    private static boolean isWithinManhattanDistance(int x1, int y1, int x2, int y2, int distance) {
+        int xDist = Math.abs(x2 - x1);
+        int yDist = Math.abs(y2 - y1);
+        return xDist + yDist <= distance;
     }
 
 }
