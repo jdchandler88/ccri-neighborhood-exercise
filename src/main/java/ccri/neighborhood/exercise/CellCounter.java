@@ -1,5 +1,7 @@
 package ccri.neighborhood.exercise;
 
+import java.util.ArrayList;
+
 /**
  * This class counts the number of neighbors within a specified distance of cells containing a positive number.
  */
@@ -18,6 +20,11 @@ public final class CellCounter {
      */
     public static int count(int[][] neighborhood, int neighborDistance) {
 
+        int width = neighborhood.length;
+        int height = neighborhood[0].length;
+
+        boolean[][] counted = new boolean[width][height];
+
         int count = 0;
 
         //search for positive number
@@ -28,8 +35,9 @@ public final class CellCounter {
                     //count number of neighbors within distance
                     for (int xSearch = (x-neighborDistance); xSearch <= x+neighborDistance; xSearch++) {
                         for (int ySearch = (y-neighborDistance); ySearch <= y+neighborDistance; ySearch++) {
-                            if (isWithinManhattanDistance(x, y, xSearch, ySearch, neighborDistance) && isWithinNeighborhoodBounds(xSearch, ySearch, neighborhood)) {
+                            if (isWithinManhattanDistance(x, y, xSearch, ySearch, neighborDistance) && isWithinNeighborhoodBounds(xSearch, ySearch, neighborhood) && !isAlreadyCounted(xSearch, ySearch, counted)) {
                                 count++;
+                                counted[xSearch][ySearch] = true;
                             }
                         }
                     }
@@ -51,6 +59,10 @@ public final class CellCounter {
     private static boolean isWithinNeighborhoodBounds(int x, int y, int[][] neighborhood) {
         return x >= 0 && x < neighborhood.length //x bounds
             && y >= 0 && y < neighborhood[0].length; //y bounds
+    }
+
+    private static boolean isAlreadyCounted(int x, int y, boolean[][] counted) {
+        return counted[x][y];
     }
 
 }
