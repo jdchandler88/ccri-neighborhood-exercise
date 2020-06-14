@@ -127,6 +127,27 @@ public class FunctionalTests {
                             .build(),
                         4,
                         26
+                ),
+                //home-made example: 9x9; [(0,0), (2,0), (4,0), (1,1), (3,1), (0,2), (2,2), (4,2), (1,3), (3,3), (0,4), (2,4), (4,4)], N=0, 13 cells counted
+                //this tests a checkerboard pattern with N=0. the app should only count the positive cell values
+                Arguments.of(
+                        new NeighborhoodBuilder(5,5)
+                            .withValueAtLocation(new Location(0,0),1)
+                            .withValueAtLocation(new Location(2,0),1)
+                            .withValueAtLocation(new Location(4,0),1)
+                            .withValueAtLocation(new Location(1,1),1)
+                            .withValueAtLocation(new Location(3,1),1)
+                            .withValueAtLocation(new Location(0,2),1)
+                            .withValueAtLocation(new Location(2,2),1)
+                            .withValueAtLocation(new Location(4,2),1)
+                            .withValueAtLocation(new Location(1,3),1)
+                            .withValueAtLocation(new Location(3,3),1)
+                            .withValueAtLocation(new Location(0,4),1)
+                            .withValueAtLocation(new Location(2,4),1)
+                            .withValueAtLocation(new Location(4,4),1)
+                            .build(),
+                        0,
+                        13
                 )
         );
     }
