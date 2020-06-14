@@ -128,7 +128,7 @@ public class FunctionalTests {
                         4,
                         26
                 ),
-                //home-made example: 9x9; [(0,0), (2,0), (4,0), (1,1), (3,1), (0,2), (2,2), (4,2), (1,3), (3,3), (0,4), (2,4), (4,4)], N=0, 13 cells counted
+                //home-made example: 5x5; [(0,0), (2,0), (4,0), (1,1), (3,1), (0,2), (2,2), (4,2), (1,3), (3,3), (0,4), (2,4), (4,4)], N=0, 13 cells counted
                 //this tests a checkerboard pattern with N=0. the app should only count the positive cell values
                 Arguments.of(
                         new NeighborhoodBuilder(5,5)
@@ -148,6 +148,16 @@ public class FunctionalTests {
                             .build(),
                         0,
                         13
+                ),
+                //home-made example: 5x5; (0,0); N=10000; 25 cells counted. this tests when N>>width && N>>height.
+                //this should return the correct answer, but as written at this time, the algorithm is *NOT OPTIMIZED* at all
+                    //NOTE: at the time of writing, this test takes a human-measureable amount of time (looong, about 3s)
+                Arguments.of(
+                        new NeighborhoodBuilder(5,5)
+                            .withValueAtLocation(new Location(0, 0), 1)
+                            .build(),
+                        10000,
+                        25
                 )
         );
     }
