@@ -35,7 +35,8 @@ public final class CellCounter {
                     //count number of neighbors within distance
                     for (int xSearch = (x-neighborDistance); xSearch <= x+neighborDistance; xSearch++) {
                         for (int ySearch = (y-neighborDistance); ySearch <= y+neighborDistance; ySearch++) {
-                            if (isWithinManhattanDistance(x, y, xSearch, ySearch, neighborDistance) && isWithinNeighborhoodBounds(xSearch, ySearch, width, height) && !isAlreadyCounted(xSearch, ySearch, counted)) {
+                            Location neighborSearchLocation = new Location(xSearch, ySearch);
+                            if (isWithinManhattanDistance(neighborhoodLocation, neighborSearchLocation, neighborDistance) && isWithinNeighborhoodBounds(neighborSearchLocation, width, height) && !isAlreadyCounted(neighborSearchLocation, counted)) {
                                 count++;
                                 counted[xSearch][ySearch] = true;
                             }
@@ -50,19 +51,21 @@ public final class CellCounter {
         return count;
     }
 
-    private static boolean isWithinManhattanDistance(int x1, int y1, int x2, int y2, int distance) {
-        int xDist = Math.abs(x2 - x1);
-        int yDist = Math.abs(y2 - y1);
+    private static boolean isWithinManhattanDistance(Location location1, Location location2, int distance) {
+        int xDist = Math.abs(location2.getX() - location1.getX());
+        int yDist = Math.abs(location2.getY() - location1.getY());
         return xDist + yDist <= distance;
     }
 
-    private static boolean isWithinNeighborhoodBounds(int x, int y, int width, int height) {
+    private static boolean isWithinNeighborhoodBounds(Location location, int width, int height) {
+        int x = location.getX();
+        int y = location.getY();
         return x >= 0 && x < width
             && y >= 0 && y < height;
     }
 
-    private static boolean isAlreadyCounted(int x, int y, boolean[][] counted) {
-        return counted[x][y];
+    private static boolean isAlreadyCounted(Location location, boolean[][] counted) {
+        return counted[location.getX()][location.getY()];
     }
 
 }
