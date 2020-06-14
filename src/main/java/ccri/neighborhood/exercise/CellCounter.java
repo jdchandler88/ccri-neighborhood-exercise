@@ -29,7 +29,7 @@ public final class CellCounter {
 
         //search for positive number
         for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
+            for (int  y = 0; y < height; y++) {
 
                 if (neighborhood.getValueAtLocation(x, y) > 0) {
                     //count number of neighbors within distance
