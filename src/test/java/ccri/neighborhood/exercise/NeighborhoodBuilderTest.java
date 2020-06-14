@@ -1,5 +1,6 @@
 package ccri.neighborhood.exercise;
 
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -22,6 +23,7 @@ public class NeighborhoodBuilderTest {
         );
     }
 
+    @Test
     public void shouldCreateNeighborhoodWithValuesAtExpectedPlaces() {
         NeighborhoodBuilder builder =
                 new NeighborhoodBuilder(5, 5)
