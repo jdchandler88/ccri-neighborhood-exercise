@@ -91,6 +91,42 @@ public class FunctionalTests {
                                 .build(),
                         4,
                         5
+                ),
+                //home-made example: 1x21; (0,15); N=4; 9 cells counted. this tests a 1-column array with no roll-off
+                Arguments.of(
+                        new NeighborhoodBuilder(1,21)
+                                .withValueAtLocation(new Location(0,15), 1)
+                                .build(),
+                        4,
+                        9
+                ),
+                //home-made example: 1x21; (0,20); N=4; 5 cells counted. this tests a 1-row array with roll-off on the bottom
+                Arguments.of(
+                        new NeighborhoodBuilder(1,21)
+                                .withValueAtLocation(new Location(0,20), 1)
+                                .build(),
+                        4,
+                        5
+                ),
+                //home-made example: 1x21; (0,0); N=4; 5 cells counted. this tests a 1-row array with roll-off on the top
+                Arguments.of(
+                        new NeighborhoodBuilder(1,21)
+                                .withValueAtLocation(new Location(0,0), 1)
+                                .build(),
+                        4,
+                        5
+                ),
+                //home-made example: 9x9; [(0,0),(1,0),(0,1),(1,1)]; N=4; 26 cells counted. this tests
+                //multiple values in the corner AND immediately adjacent
+                Arguments.of(
+                        new NeighborhoodBuilder(9,9)
+                            .withValueAtLocation(new Location(0,0), 1)
+                            .withValueAtLocation(new Location(1,0), 1)
+                            .withValueAtLocation(new Location(0, 1), 1)
+                            .withValueAtLocation(new Location(1, 1), 1)
+                            .build(),
+                        4,
+                        26
                 )
         );
     }
