@@ -45,8 +45,9 @@ public class NeighborhoodTest {
     })
     public void shouldRetrieveSameValueAtLocationThatWasSet(int width, int height, int x, int y, int value) {
         Neighborhood neighborhood = new Neighborhood(width, height);
-        neighborhood.setValueAtLocation(x, y, value);
-        assertEquals(value, neighborhood.getValueAtLocation(x, y));
+        Location testLocation = new Location(x, y);
+        neighborhood.setValueAtLocation(testLocation, value);
+        assertEquals(value, neighborhood.getValueAtLocation(testLocation));
     }
 
 }

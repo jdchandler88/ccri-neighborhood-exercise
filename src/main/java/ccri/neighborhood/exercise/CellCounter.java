@@ -30,8 +30,8 @@ public final class CellCounter {
         //search for positive number
         for (int x = 0; x < width; x++) {
             for (int  y = 0; y < height; y++) {
-
-                if (neighborhood.getValueAtLocation(x, y) > 0) {
+                Location neighborhoodLocation = new Location(x, y);
+                if (neighborhood.getValueAtLocation(neighborhoodLocation) > 0) {
                     //count number of neighbors within distance
                     for (int xSearch = (x-neighborDistance); xSearch <= x+neighborDistance; xSearch++) {
                         for (int ySearch = (y-neighborDistance); ySearch <= y+neighborDistance; ySearch++) {

@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class NeighborhoodBuilderTest {
 
-    /*
     @ParameterizedTest
     @CsvSource({
             "1, 1",
@@ -22,6 +21,23 @@ public class NeighborhoodBuilderTest {
                 () -> assertEquals(height, neighborhood.getHeight())
         );
     }
-    */
+
+    public void shouldCreateNeighborhoodWithValuesAtExpectedPlaces() {
+        NeighborhoodBuilder builder =
+                new NeighborhoodBuilder(5, 5)
+                .withValueAtLocation(new Location(0,0), 1)
+                .withValueAtLocation(new Location(1,1),1)
+                .withValueAtLocation(new Location(2,2),1)
+                .withValueAtLocation(new Location(3,3),1)
+                .withValueAtLocation(new Location(4,4),1);
+        Neighborhood neighborhood = builder.build();
+        assertAll(
+                () -> assertEquals(1, neighborhood.getValueAtLocation(new Location(0, 0))),
+                () -> assertEquals(1, neighborhood.getValueAtLocation(new Location(1,1))),
+                () -> assertEquals(1, neighborhood.getValueAtLocation(new Location(2,2))),
+                () -> assertEquals(1, neighborhood.getValueAtLocation(new Location(3,3))),
+                () -> assertEquals(1, neighborhood.getValueAtLocation(new Location(4,4)))
+        );
+    }
 
 }

@@ -27,12 +27,12 @@ public class Neighborhood {
         return height;
     }
 
-    public void setValueAtLocation(int x, int y, int value) {
-        this.neighborhood[x][y] = value;
+    public void setValueAtLocation(Location loc, int value) {
+        this.neighborhood[loc.getX()][loc.getY()] = value;
     }
 
-    public int getValueAtLocation(int x, int y) {
-        return this.neighborhood[x][y];
+    public int getValueAtLocation(Location loc) {
+        return this.neighborhood[loc.getX()][loc.getY()];
     }
 
 }
