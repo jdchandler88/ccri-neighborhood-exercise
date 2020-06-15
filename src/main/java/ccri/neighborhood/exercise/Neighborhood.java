@@ -1,5 +1,7 @@
 package ccri.neighborhood.exercise;
 
+import java.util.Iterator;
+
 public class Neighborhood {
 
     private static final String NEIGHBORHOOD_DIMENSION_VALIDATION_ERROR_MESSAGE_TEMPLATE = "Neighborhood width and height must each be > 0. Received width=%d";
@@ -33,6 +35,10 @@ public class Neighborhood {
 
     public int getValueAtLocation(Location loc) {
         return this.neighborhood[loc.getX()][loc.getY()];
+    }
+
+    public Iterator<Location> locationIterator() {
+        return new NeighborhoodLocationIterator(this, new Location(0, 0));
     }
 
 }

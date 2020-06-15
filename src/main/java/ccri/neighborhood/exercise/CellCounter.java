@@ -1,6 +1,7 @@
 package ccri.neighborhood.exercise;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * This class counts the number of neighbors within a specified distance of cells containing a positive number.
@@ -27,24 +28,21 @@ public final class CellCounter {
 
         int count = 0;
 
-        //search for positive number
-        for (int x = 0; x < width; x++) {
-            for (int  y = 0; y < height; y++) {
-                Location neighborhoodLocation = new Location(x, y);
-                if (neighborhood.getValueAtLocation(neighborhoodLocation) > 0) {
-                    //count number of neighbors within distance
-                    for (int xSearch = (x-neighborDistance); xSearch <= x+neighborDistance; xSearch++) {
-                        for (int ySearch = (y-neighborDistance); ySearch <= y+neighborDistance; ySearch++) {
-                            Location neighborSearchLocation = new Location(xSearch, ySearch);
-                            if (isWithinManhattanDistance(neighborhoodLocation, neighborSearchLocation, neighborDistance) && isWithinNeighborhoodBounds(neighborSearchLocation, width, height) && !isAlreadyCounted(neighborSearchLocation, counted)) {
-                                count++;
-                                counted[xSearch][ySearch] = true;
-                            }
+        Iterator<Location> neighborhoodLocationIterator = neighborhood.locationIterator();
+
+        while (neighborhoodLocationIterator.hasNext()) {
+            Location neighborhoodLocation = neighborhoodLocationIterator.next();
+            if (neighborhood.getValueAtLocation(neighborhoodLocation) > 0) {
+                //count number of neighbors within distance
+                for (int xSearch = (neighborhoodLocation.getX()-neighborDistance); xSearch <= neighborhoodLocation.getX()+neighborDistance; xSearch++) {
+                    for (int ySearch = (neighborhoodLocation.getY()-neighborDistance); ySearch <= neighborhoodLocation.getY()+neighborDistance; ySearch++) {
+                        Location neighborSearchLocation = new Location(xSearch, ySearch);
+                        if (isWithinManhattanDistance(neighborhoodLocation, neighborSearchLocation, neighborDistance) && isWithinNeighborhoodBounds(neighborSearchLocation, width, height) && !isAlreadyCounted(neighborSearchLocation, counted)) {
+                            count++;
+                            counted[xSearch][ySearch] = true;
                         }
                     }
-
                 }
-
             }
         }
 
