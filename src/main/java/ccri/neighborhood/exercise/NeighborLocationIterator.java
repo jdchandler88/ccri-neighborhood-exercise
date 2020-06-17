@@ -63,7 +63,7 @@ public class NeighborLocationIterator implements Iterator<Location> {
     }
 
     private void moveCursorToNextRow() {
-        currentX = 0;
+        currentX = this.centerLocation.getX() - this.neighborThreshold;
         currentY++;
     }
 
