@@ -39,9 +39,12 @@ public class Neighborhood implements Iterable<Location> {
 
     @Override
     public Iterator<Location> iterator() {
-        return new NeighborhoodLocationIterator(this, new Location(0, 0));
+        return new NeighborhoodLocationIterator(
+                this, new Location(0, 0));
     }
 
-    public Iterator<Location> neighborIterator(Location centerLocation, int neighborThreshold) { return new NeighborLocationIterator(this, centerLocation, neighborThreshold); }
+    public Iterator<Location> neighborIterator(Location centerLocation, int neighborThreshold) {
+        return new NeighborLocationIterator(this, centerLocation, neighborThreshold);
+    }
 
 }

@@ -24,8 +24,15 @@ public class NeighborLocationIterator implements Iterator<Location> {
 
     @Override
     public boolean hasNext() {
-        seekToNextValidLocation();
-        return hasMorePossibleNeighbors();
+        while (hasMorePossibleNeighbors()) {
+            Location currentLocation = new Location(this.currentX, this.currentY);
+            if (isValidNeighborLocation(currentLocation)) {
+                return true;
+            } else {
+                advanceCursor();
+            }
+        }
+        return false;
     }
 
     @Override
@@ -37,17 +44,6 @@ public class NeighborLocationIterator implements Iterator<Location> {
 
     private boolean hasMorePossibleNeighbors() {
         return currentX <= (centerLocation.getX() + neighborThreshold) && currentY <= (centerLocation.getY() + neighborThreshold);
-    }
-
-    private void seekToNextValidLocation() {
-        while (hasMorePossibleNeighbors()) {
-            Location currentLocation = new Location(this.currentX, this.currentY);
-            if (isValidNeighborLocation(currentLocation)) {
-                break;
-            } else {
-                advanceCursor();
-            }
-        }
     }
 
     private boolean isValidNeighborLocation(Location location) {
