@@ -2,7 +2,7 @@ package ccri.neighborhood.exercise;
 
 import java.util.Iterator;
 
-public class Neighborhood {
+public class Neighborhood implements Iterable<Location> {
 
     private static final String NEIGHBORHOOD_DIMENSION_VALIDATION_ERROR_MESSAGE_TEMPLATE = "Neighborhood width and height must each be > 0. Received width=%d";
 
@@ -37,8 +37,11 @@ public class Neighborhood {
         return this.neighborhood[loc.getX()][loc.getY()];
     }
 
-    public Iterator<Location> locationIterator() {
+    @Override
+    public Iterator<Location> iterator() {
         return new NeighborhoodLocationIterator(this, new Location(0, 0));
     }
+
+    public Iterator<Location> neighborIterator(Location centerLocation, int neighborThreshold) { return new NeighborLocationIterator(this, centerLocation, neighborThreshold); }
 
 }
