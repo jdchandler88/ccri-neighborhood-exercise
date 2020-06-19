@@ -1,9 +1,8 @@
 package ccri.neighborhood.exercise;
 
 import java.util.Iterator;
-import java.util.stream.IntStream;
 
-public class Neighborhood implements Iterable<Location> {
+public class Neighborhood implements Iterable<Cell> {
 
     private static final String NEIGHBORHOOD_DIMENSION_VALIDATION_ERROR_MESSAGE_TEMPLATE = "Neighborhood width and height must each be > 0. Received width=%d";
 
@@ -22,7 +21,7 @@ public class Neighborhood implements Iterable<Location> {
         this.neighborhood = new Cell[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                this.neighborhood[x][y] = new Cell();
+                this.neighborhood[x][y] = new Cell(new Location(x, y));
             }
         }
     }
@@ -38,15 +37,15 @@ public class Neighborhood implements Iterable<Location> {
     public Cell getCellAtLocation(Location location) {
         return this.neighborhood[location.getX()][location.getY()];
     }
-    
+
     @Override
-    public Iterator<Location> iterator() {
-        return new NeighborhoodLocationIterator(
+    public Iterator<Cell> iterator() {
+        return new NeighborhoodCellIterator(
                 this, new Location(0, 0));
     }
 
-    public Iterator<Location> neighborIterator(Location centerLocation, int neighborThreshold) {
-        return new NeighborLocationIterator(this, centerLocation, neighborThreshold);
+    public Iterator<Cell> neighborIterator(Location centerLocation, int neighborThreshold) {
+        return new NeighborCellIterator(this, centerLocation, neighborThreshold);
     }
 
 }

@@ -2,7 +2,7 @@ package ccri.neighborhood.exercise;
 
 import java.util.Iterator;
 
-public class NeighborLocationIterator implements Iterator<Location> {
+public class NeighborCellIterator implements Iterator<Cell> {
 
     private Neighborhood neighborhood;
 
@@ -14,7 +14,7 @@ public class NeighborLocationIterator implements Iterator<Location> {
 
     int currentY;
 
-    public NeighborLocationIterator(Neighborhood neighborhood, Location centerLocation, int neighborThreshold) {
+    public NeighborCellIterator(Neighborhood neighborhood, Location centerLocation, int neighborThreshold) {
         this.neighborhood = neighborhood;
         this.centerLocation = centerLocation;
         this.neighborThreshold = neighborThreshold;
@@ -36,10 +36,10 @@ public class NeighborLocationIterator implements Iterator<Location> {
     }
 
     @Override
-    public Location next() {
+    public Cell next() {
         Location location = new Location(currentX, currentY);
         advanceCursor();
-        return location;
+        return neighborhood.getCellAtLocation(location);
     }
 
     private boolean hasMorePossibleNeighbors() {

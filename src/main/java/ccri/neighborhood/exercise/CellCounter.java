@@ -22,28 +22,27 @@ public class CellCounter {
 
     public static int countUniqueCellsWithinDistanceOfActiveCells(Neighborhood neighborhood, int neighborDistance) {
         return (int)
-                getNeighborhoodLocationsStream(neighborhood)
-                .filter(location -> isCellWithPositiveValue(neighborhood, location))
-                .flatMap(locationWithPositiveValue -> getAllNeighborsWithinDistanceStream(neighborhood, neighborDistance, locationWithPositiveValue))
-                .map(neighborOfPositiveValueCell -> getCellAtLocationAndCountIt(neighborhood, neighborOfPositiveValueCell))
+                getNeighborhoodCellStream(neighborhood)
+                .filter(cell -> isCellWithPositiveValue(cell))
+                .flatMap(cellWithPositiveValue -> getAllNeighborsWithinDistanceStream(neighborhood, neighborDistance, cellWithPositiveValue))
+                .map(neighborOfPositiveValueCell -> countCell(neighborOfPositiveValueCell))
                 .filter(neighborCell -> isCellCountedOnlyOnce(neighborCell))
                 .count();
     }
 
-    private static Stream<Location> getNeighborhoodLocationsStream(Neighborhood neighborhood) {
+    private static Stream<Cell> getNeighborhoodCellStream(Neighborhood neighborhood) {
         return StreamSupport.stream(neighborhood.spliterator(), false);
     }
 
-    private static boolean isCellWithPositiveValue(Neighborhood neighborhood, Location location) {
-        return neighborhood.getCellAtLocation(location).getValue() > 0;
+    private static boolean isCellWithPositiveValue(Cell cell) {
+        return cell.getValue() > 0;
     }
 
-    private static Stream<Location> getAllNeighborsWithinDistanceStream(Neighborhood neighborhood, int  neighborDistance, Location center) {
-        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(neighborhood.neighborIterator(center, neighborDistance), 0), false);
+    private static Stream<Cell> getAllNeighborsWithinDistanceStream(Neighborhood neighborhood, int  neighborDistance, Cell center) {
+        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(neighborhood.neighborIterator(center.getLocation(), neighborDistance), 0), false);
     }
 
-    private static Cell getCellAtLocationAndCountIt(Neighborhood neighborhood, Location location) {
-        Cell cell = neighborhood.getCellAtLocation(location);
+    private static Cell countCell(Cell cell) {
         cell.incrementCount();
         return cell;
     }

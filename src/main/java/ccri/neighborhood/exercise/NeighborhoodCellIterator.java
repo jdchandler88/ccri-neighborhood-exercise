@@ -2,17 +2,17 @@ package ccri.neighborhood.exercise;
 
 import java.util.Iterator;
 
-public class NeighborhoodLocationIterator implements Iterator<Location> {
+public class NeighborhoodCellIterator implements Iterator<Cell> {
 
     private Neighborhood neighborhood;
     private Location currentLocation;
 
-    NeighborhoodLocationIterator(Neighborhood neighborhood, Location beginLocation) {
+    NeighborhoodCellIterator(Neighborhood neighborhood, Location beginLocation) {
         this.neighborhood = neighborhood;
         this.currentLocation = beginLocation;
     }
 
-    NeighborhoodLocationIterator(Neighborhood neighborhood) {
+    NeighborhoodCellIterator(Neighborhood neighborhood) {
         this(neighborhood, new Location(0, 0));
     }
 
@@ -25,7 +25,7 @@ public class NeighborhoodLocationIterator implements Iterator<Location> {
     }
 
     @Override
-    public Location next() {
+    public Cell next() {
         //get location for current iterator position
         Location location = this.currentLocation;
         //advance iterator
@@ -34,7 +34,7 @@ public class NeighborhoodLocationIterator implements Iterator<Location> {
         } else {
             moveIteratorToNextColumnInRow();
         }
-        return location;
+        return neighborhood.getCellAtLocation(location);
     }
 
     private boolean isAtEndOfRow() {
