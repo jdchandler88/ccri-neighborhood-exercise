@@ -7,26 +7,20 @@ import java.util.stream.StreamSupport;
 /**
  * This class counts the number of neighbors within a specified distance of cells containing a positive number.
  */
-public class CellCounter {
-
-    private Neighborhood neighborhood;
-    private int neighborDistance;
+public final class CellCounter {
 
     /**
      * Prevent instantiation
      */
-    public CellCounter(Neighborhood neighborhood, int neighborDistance) {
-        this.neighborhood = neighborhood;
-        this.neighborDistance = neighborDistance;
-    }
+    private CellCounter() {}
 
     public static int countUniqueCellsWithinDistanceOfActiveCells(Neighborhood neighborhood, int neighborDistance) {
         return (int)
                 getNeighborhoodCellStream(neighborhood)
-                .filter(cell -> isCellWithPositiveValue(cell))
+                .filter(CellCounter::isCellWithPositiveValue)
                 .flatMap(cellWithPositiveValue -> getAllNeighborsWithinDistanceStream(neighborhood, neighborDistance, cellWithPositiveValue))
-                .map(neighborOfPositiveValueCell -> countCell(neighborOfPositiveValueCell))
-                .filter(neighborCell -> isCellCountedOnlyOnce(neighborCell))
+                .map(CellCounter::countCell)
+                .filter(CellCounter::isCellCountedOnlyOnce)
                 .count();
     }
 
