@@ -18,7 +18,7 @@ public class FunctionalTests {
     @ParameterizedTest(name = "[{index} Expects {2} cells]")
     @MethodSource("exampleProblemTestDataProvider")
     public void appShouldReturnAppropriateNumberOfCellsFromProblemExamples(Neighborhood neighborhood, int neighborDistance, int expectedNumberOfCells) {
-        int numberOfNeighbors = CellCounter.count(neighborhood, neighborDistance);
+        int numberOfNeighbors = CellCounter.countUniqueCellsWithinDistanceOfActiveCells(neighborhood, neighborDistance);
         assertEquals(expectedNumberOfCells, numberOfNeighbors);
     }
 

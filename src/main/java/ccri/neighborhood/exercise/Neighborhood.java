@@ -1,6 +1,7 @@
 package ccri.neighborhood.exercise;
 
 import java.util.Iterator;
+import java.util.stream.IntStream;
 
 public class Neighborhood implements Iterable<Location> {
 
@@ -10,7 +11,7 @@ public class Neighborhood implements Iterable<Location> {
 
     int height;
 
-    int[][] neighborhood;
+    Cell[][] neighborhood;
 
     public Neighborhood(int width, int height) {
         if (width <= 0 || height <= 0) {
@@ -18,7 +19,12 @@ public class Neighborhood implements Iterable<Location> {
         }
         this.width = width;
         this.height = height;
-        this.neighborhood = new int[width][height];
+        this.neighborhood = new Cell[width][height];
+        for (int x = 0; x < width; x++) {
+            for (int y = 0; y < height; y++) {
+                this.neighborhood[x][y] = new Cell();
+            }
+        }
     }
 
     public int getWidth() {
@@ -29,14 +35,10 @@ public class Neighborhood implements Iterable<Location> {
         return height;
     }
 
-    public void setValueAtLocation(Location loc, int value) {
-        this.neighborhood[loc.getX()][loc.getY()] = value;
+    public Cell getCellAtLocation(Location location) {
+        return this.neighborhood[location.getX()][location.getY()];
     }
-
-    public int getValueAtLocation(Location loc) {
-        return this.neighborhood[loc.getX()][loc.getY()];
-    }
-
+    
     @Override
     public Iterator<Location> iterator() {
         return new NeighborhoodLocationIterator(

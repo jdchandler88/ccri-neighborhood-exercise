@@ -21,7 +21,7 @@ public class NeighborhoodBuilder {
 
     public Neighborhood build() {
         Neighborhood neighborhood = new Neighborhood(this.width, this.height);
-        valuesAtLocation.forEach((location, value) -> neighborhood.setValueAtLocation(location, value));
+        valuesAtLocation.forEach((location, value) -> neighborhood.getCellAtLocation(location).setValue(value));
         return neighborhood;
     }
 
