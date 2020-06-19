@@ -18,3 +18,10 @@ well as FindSecurityBugs, a plugin for Spotbugs.
 Spotbugs generates an HTML reports for both **main** AND **test** code. These reports are generated in 
 *<gradle_project_dir>/build/reports/spotbugs*. For **main** analysis, use ```gradle spotbugsMain``` and for **test** 
 analysis, use ```gradle spotbugsTest```.
+
+### JaCoCo (Java Code Coverage)
+JaCoCo generates code coverage data based on execution. For this project, unit tests drive code coverage data. This 
+project is configured to automatically generate a coverage report after tests execute. To execute tests and gather a
+coverage report, run ```gradle test``` 
+
+The code coverage report is located at *<gradle_project_dir>/build/reports/jacoco/test/html/*.
