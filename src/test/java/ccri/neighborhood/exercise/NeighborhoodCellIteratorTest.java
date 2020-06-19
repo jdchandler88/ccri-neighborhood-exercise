@@ -49,8 +49,8 @@ public class NeighborhoodCellIteratorTest {
         Location currentLocation = it.next().getLocation();   //put iterator initially at end of row. this will get the location and then advance the iterator
         Location nextLocation = it.next().getLocation();  //the iterator, having advanced, should be at the next row
         assertAll(
-                () -> assertEquals(0, nextLocation.getX()),
-                () -> assertEquals(1, nextLocation.getY())
+                () -> assertEquals(new Location(4, 0), currentLocation),
+                () -> assertEquals(new Location(0,1), nextLocation)
         );
     }
 
@@ -58,8 +58,11 @@ public class NeighborhoodCellIteratorTest {
     public void shouldNotHaveAnyMoreLocationsWhenAtEndOfNeighborhood() {
         Neighborhood neighborhood = new NeighborhoodBuilder(5,5).build();
         NeighborhoodCellIterator it = new NeighborhoodCellIterator(neighborhood, new Location(4, 4));
-        Location finalNeighborhoodLocation = it.next().getLocation(); //"consume" the last location in the neighborhood, advancing the iterator.
-        assertFalse(it.hasNext());
+        Location currentLocation = it.next().getLocation(); //"consume" the last location in the neighborhood, advancing the iterator.
+        assertAll(
+                () -> assertEquals(new Location(4,4), currentLocation),
+                () -> assertFalse(it.hasNext())
+        );
     }
 
 }

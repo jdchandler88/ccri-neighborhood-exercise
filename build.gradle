@@ -16,6 +16,9 @@ plugins {
 
     // Apply the application plugin to add support for building a CLI application.
     id 'application'
+
+    //run spotbugs
+    id "com.github.spotbugs" version "4.4.1"
 }
 
 repositories {
@@ -36,6 +39,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-params
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.6.2'
+
+    spotbugsPlugins 'com.h3xstream.findsecbugs:findsecbugs-plugin:1.10.1'
 }
 
 application {
@@ -48,6 +53,19 @@ test {
     useJUnitPlatform()
 }
 
+spotbugsMain {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
+
+spotbugsTest {
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}
 
 //from https://stackoverflow.com/questions/3963708/gradle-how-to-display-test-results-in-the-console-in-real-time
 tasks.withType(Test) {

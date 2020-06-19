@@ -19,7 +19,7 @@ public final class CellCounter {
                 getNeighborhoodCellStream(neighborhood)
                 .filter(CellCounter::isCellWithPositiveValue)
                 .flatMap(cellWithPositiveValue -> getAllNeighborsWithinDistanceStream(neighborhood, neighborDistance, cellWithPositiveValue))
-                .map(CellCounter::countCell)
+                .map(CellCounter::countCell) //this doesn't ACTUALLY map a Cell to another type. It performs an operation on it and returns it
                 .filter(CellCounter::isCellCountedOnlyOnce)
                 .count();
     }
