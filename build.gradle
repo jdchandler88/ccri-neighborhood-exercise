@@ -25,6 +25,8 @@ plugins {
 
     //another static code analysis tool
     id 'pmd'
+
+    id 'checkstyle'
 }
 
 repositories {
@@ -83,6 +85,10 @@ jacocoTestReport {
 
 pmd {
     pmdTest.enabled=false
+}
+
+checkstyle {
+    toolVersion '8.33'
 }
 
 //from https://stackoverflow.com/questions/3963708/gradle-how-to-display-test-results-in-the-console-in-real-time

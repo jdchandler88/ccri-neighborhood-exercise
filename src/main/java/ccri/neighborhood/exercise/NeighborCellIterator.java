@@ -2,87 +2,102 @@ package ccri.neighborhood.exercise;
 
 import java.util.Iterator;
 
+/**
+ * Iterates over Cells within a specified Manhattan Distance of the supplied Cell.
+ */
 @SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class NeighborCellIterator implements Iterator<Cell> {
 
-    private Neighborhood neighborhood;
+  private Neighborhood neighborhood;
 
-    private Location centerLocation;
+  private Location centerLocation;
 
-    int neighborThreshold;
+  int neighborThreshold;
 
-    int currentX;
+  int currentX;
 
-    int currentY;
+  int currentY;
 
-    public NeighborCellIterator(Neighborhood neighborhood, Location centerLocation, int neighborThreshold) {
-        this.neighborhood = neighborhood;
-        this.centerLocation = centerLocation;
-        this.neighborThreshold = neighborThreshold;
-        this.currentX = centerLocation.getX() - neighborThreshold;
-        this.currentY = centerLocation.getY() - neighborThreshold;
-    }
+  /**
+   * Creates a NeighborCellIterator. This iterates over the neighbors within the specified Manhattan
+   * distance of the centerLocation.
+   * @param neighborhood neighborhood inside of which the cells are located
+   * @param centerLocation location at which the center cell is located. All cells iterated are
+   *                       neighbors of this cell. NOTE: this also includes the center cell
+   * @param neighborThreshold distance from center cell. If a cell is within this distance to the
+   *                          center cell, then it will be returned by this iterator
+   */
+  public NeighborCellIterator(Neighborhood neighborhood, Location centerLocation,
+                              int neighborThreshold) {
+    this.neighborhood = neighborhood;
+    this.centerLocation = centerLocation;
+    this.neighborThreshold = neighborThreshold;
+    this.currentX = centerLocation.getX() - neighborThreshold;
+    this.currentY = centerLocation.getY() - neighborThreshold;
+  }
 
-    @Override
-    public boolean hasNext() {
-        while (hasMorePossibleNeighbors()) {
-            Location currentLocation = new Location(this.currentX, this.currentY);
-            if (isValidNeighborLocation(currentLocation)) {
-                return true;
-            } else {
-                advanceCursor();
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public Cell next() {
-        Location location = new Location(currentX, currentY);
+  @Override
+  public boolean hasNext() {
+    while (hasMorePossibleNeighbors()) {
+      Location currentLocation = new Location(this.currentX, this.currentY);
+      if (isValidNeighborLocation(currentLocation)) {
+        return true;
+      } else {
         advanceCursor();
-        return neighborhood.getCellAtLocation(location);
+      }
     }
+    return false;
+  }
 
-    private boolean hasMorePossibleNeighbors() {
-        return currentX <= (centerLocation.getX() + neighborThreshold) && currentY <= (centerLocation.getY() + neighborThreshold);
-    }
+  @Override
+  public Cell next() {
+    Location location = new Location(currentX, currentY);
+    advanceCursor();
+    return neighborhood.getCellAtLocation(location);
+  }
 
-    private boolean isValidNeighborLocation(Location location) {
-        return isWithinManhattanDistanceFromCenterLocation(location) && isWithinNeighborhoodBounds(location);
-    }
+  private boolean hasMorePossibleNeighbors() {
+    return currentX <= (centerLocation.getX() + neighborThreshold)
+        && currentY <= (centerLocation.getY() + neighborThreshold);
+  }
 
-    private void advanceCursor() {
-        if (isAtEndOfCurrentRow()) {
-            moveCursorToNextRow();
-        } else {
-            moveCursorToNextColumn();
-        }
-    }
+  private boolean isValidNeighborLocation(Location location) {
+    return isWithinManhattanDistanceFromCenterLocation(location)
+        && isWithinNeighborhoodBounds(location);
+  }
 
-    private boolean isAtEndOfCurrentRow() {
-        return currentX == centerLocation.getX() + neighborThreshold;
+  private void advanceCursor() {
+    if (isAtEndOfCurrentRow()) {
+      moveCursorToNextRow();
+    } else {
+      moveCursorToNextColumn();
     }
+  }
 
-    private void moveCursorToNextRow() {
-        currentX = this.centerLocation.getX() - this.neighborThreshold;
-        currentY++;
-    }
+  private boolean isAtEndOfCurrentRow() {
+    return currentX == centerLocation.getX() + neighborThreshold;
+  }
 
-    private void moveCursorToNextColumn() {
-        currentX++;
-    }
+  private void moveCursorToNextRow() {
+    currentX = this.centerLocation.getX() - this.neighborThreshold;
+    currentY++;
+  }
 
-    private boolean isWithinManhattanDistanceFromCenterLocation(Location location) {
-        int xDist = Math.abs(centerLocation.getX() - location.getX());
-        int yDist = Math.abs(centerLocation.getY() - location.getY());
-        return xDist + yDist <= neighborThreshold;
-    }
+  private void moveCursorToNextColumn() {
+    currentX++;
+  }
 
-    private boolean isWithinNeighborhoodBounds(Location location) {
-        int x = location.getX();
-        int y = location.getY();
-        return x >= 0 && x < neighborhood.getWidth()
-                && y >= 0 && y < neighborhood.getHeight();
-    }
+  private boolean isWithinManhattanDistanceFromCenterLocation(Location location) {
+    int distanceX = Math.abs(centerLocation.getX() - location.getX());
+    int distanceY = Math.abs(centerLocation.getY() - location.getY());
+    return distanceX + distanceY <= neighborThreshold;
+  }
+
+  private boolean isWithinNeighborhoodBounds(Location location) {
+    int x = location.getX();
+    int y = location.getY();
+    return x >= 0 && x < neighborhood.getWidth()
+        && y >= 0 && y < neighborhood.getHeight();
+  }
 
 }

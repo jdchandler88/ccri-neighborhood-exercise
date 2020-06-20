@@ -3,34 +3,34 @@ package ccri.neighborhood.exercise;
 @SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class Cell {
 
-    private Location location;
+  private Location location;
 
-    private int value = 0;
+  private int value = 0;
 
-    private int timesCounted = 0;
+  private int timesCounted = 0;
 
-    public Cell(Location location) {
-        this.location = location;
-    }
+  public Cell(Location location) {
+    this.location = location;
+  }
 
-    public Location getLocation() {
-        return location;
-    }
+  public Location getLocation() {
+    return location;
+  }
 
-    public void setValue(int value) {
-        this.value = value;
-    }
+  public void setValue(int value) {
+    this.value = value;
+  }
 
-    public int getValue() {
-        return value;
-    }
+  public int getValue() {
+    return value;
+  }
 
-    public void incrementCount() {
-        timesCounted++;
-    }
+  public void incrementCount() {
+    timesCounted++;
+  }
 
-    public int getTimesCounted() {
-        return timesCounted;
-    }
+  public int getTimesCounted() {
+    return timesCounted;
+  }
 
 }
