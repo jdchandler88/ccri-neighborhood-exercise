@@ -2,6 +2,7 @@ package ccri.neighborhood.exercise;
 
 import java.util.Iterator;
 
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class NeighborhoodCellIterator implements Iterator<Cell> {
 
     private Neighborhood neighborhood;

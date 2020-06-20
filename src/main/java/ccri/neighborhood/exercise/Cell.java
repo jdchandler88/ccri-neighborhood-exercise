@@ -1,5 +1,6 @@
 package ccri.neighborhood.exercise;
 
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class Cell {
 
     private Location location;

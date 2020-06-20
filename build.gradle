@@ -22,6 +22,9 @@ plugins {
 
     //code coverage
     id 'jacoco'
+
+    //another static code analysis tool
+    id 'pmd'
 }
 
 repositories {
@@ -76,6 +79,10 @@ spotbugsTest {
 
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
+}
+
+pmd {
+    pmdTest.enabled=false
 }
 
 //from https://stackoverflow.com/questions/3963708/gradle-how-to-display-test-results-in-the-console-in-real-time

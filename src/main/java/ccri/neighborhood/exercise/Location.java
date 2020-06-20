@@ -2,6 +2,7 @@ package ccri.neighborhood.exercise;
 
 import java.util.Objects;
 
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class Location {
 
     private int x;

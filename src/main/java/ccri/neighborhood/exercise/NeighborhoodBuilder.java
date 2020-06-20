@@ -3,6 +3,7 @@ package ccri.neighborhood.exercise;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class NeighborhoodBuilder {
 
     private int width;

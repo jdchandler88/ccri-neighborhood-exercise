@@ -25,3 +25,6 @@ project is configured to automatically generate a coverage report after tests ex
 coverage report, run ```gradle test``` 
 
 The code coverage report is located at *<gradle_project_dir>/build/reports/jacoco/test/html/*.
+
+## PMD 
+PMD is another static code analysis tool. See https://pmd.github.io/. This project is configured to run PMD for 

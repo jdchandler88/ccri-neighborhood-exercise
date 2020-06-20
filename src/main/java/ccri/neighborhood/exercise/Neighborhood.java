@@ -2,6 +2,7 @@ package ccri.neighborhood.exercise;
 
 import java.util.Iterator;
 
+@SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class Neighborhood implements Iterable<Cell> {
 
     private static final String NEIGHBORHOOD_DIMENSION_VALIDATION_ERROR_MESSAGE_TEMPLATE = "Neighborhood width and height must each be > 0. Received width=%d";
@@ -10,7 +11,7 @@ public class Neighborhood implements Iterable<Cell> {
 
     int height;
 
-    Cell[][] neighborhood;
+    Cell[][] neighborhoodArray;
 
     public Neighborhood(int width, int height) {
         if (width <= 0 || height <= 0) {
@@ -18,10 +19,10 @@ public class Neighborhood implements Iterable<Cell> {
         }
         this.width = width;
         this.height = height;
-        this.neighborhood = new Cell[width][height];
+        this.neighborhoodArray = new Cell[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                this.neighborhood[x][y] = new Cell(new Location(x, y));
+                this.neighborhoodArray[x][y] = new Cell(new Location(x, y));
             }
         }
     }
@@ -35,7 +36,7 @@ public class Neighborhood implements Iterable<Cell> {
     }
 
     public Cell getCellAtLocation(Location location) {
-        return this.neighborhood[location.getX()][location.getY()];
+        return this.neighborhoodArray[location.getX()][location.getY()];
     }
 
     @Override

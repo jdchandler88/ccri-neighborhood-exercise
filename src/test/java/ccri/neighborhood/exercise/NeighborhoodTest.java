@@ -19,8 +19,8 @@ public class NeighborhoodTest {
     })
     public void shouldHaveARectangularShape(int width, int height) {
         Neighborhood neighborhood = new Neighborhood(width, height);
-        assertEquals(width, neighborhood.neighborhood.length);
-        Stream.of(neighborhood.neighborhood).forEach(row -> assertEquals(row.length, height));
+        assertEquals(width, neighborhood.neighborhoodArray.length);
+        Stream.of(neighborhood.neighborhoodArray).forEach(row -> assertEquals(row.length, height));
     }
 
     @ParameterizedTest
