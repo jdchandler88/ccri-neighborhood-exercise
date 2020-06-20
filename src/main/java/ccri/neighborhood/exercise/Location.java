@@ -29,7 +29,7 @@ public class Location {
     if (this == o) {
       return true;
     }
-    if (o == null || getClass() != o.getClass()) {
+    if (!(o instanceof Location)) {
       return false;
     }
     Location location = (Location) o;

@@ -22,7 +22,7 @@ public final class CellCounter {
    * total number of cells within the specified distance. This distance is the "Manhattan Distance"
    * @param neighborhood neighborhood containing cells
    * @param neighborDistance distance from cell with positive value that a cell will be counted
-   * @return
+   * @return count of neighbors within distance of positive cells
    */
   public static int countUniqueCellsWithinDistanceOfActiveCells(Neighborhood neighborhood,
                                                                 int neighborDistance) {

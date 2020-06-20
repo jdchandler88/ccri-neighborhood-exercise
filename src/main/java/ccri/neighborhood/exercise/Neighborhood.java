@@ -5,9 +5,6 @@ import java.util.Iterator;
 @SuppressWarnings("PMD.BeanMembersShouldSerialize")
 public class Neighborhood implements Iterable<Cell> {
 
-  private static final String NEIGHBORHOOD_DIMENSION_VALIDATION_ERROR_MESSAGE_TEMPLATE =
-      "Neighborhood width and height must each be > 0. Received width=%d";
-
   int width;
 
   int height;
@@ -22,7 +19,12 @@ public class Neighborhood implements Iterable<Cell> {
   public Neighborhood(int width, int height) {
     if (width <= 0 || height <= 0) {
       throw new IllegalArgumentException(
-          String.format(NEIGHBORHOOD_DIMENSION_VALIDATION_ERROR_MESSAGE_TEMPLATE, width, height));
+          String.format(
+              "Neighborhood width and height must each be > 0. Received width=%d, height=%d",
+              width,
+              height
+          )
+      );
     }
     this.width = width;
     this.height = height;

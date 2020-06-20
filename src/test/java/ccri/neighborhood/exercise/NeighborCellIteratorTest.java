@@ -27,7 +27,7 @@ public class NeighborCellIteratorTest {
 
     int count = 0;
     while (neighborIterator.hasNext()) {
-      Cell neighborCell = neighborIterator.next();
+      neighborIterator.next();
       count++;
     }
 
