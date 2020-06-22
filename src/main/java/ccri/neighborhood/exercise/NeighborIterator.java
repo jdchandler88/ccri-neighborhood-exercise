@@ -3,10 +3,15 @@ package ccri.neighborhood.exercise;
 import java.util.Iterator;
 
 /**
- * Iterates over Cells within a specified Manhattan Distance of the supplied Cell.
+ * Iterates over locations within a specified Manhattan Distance of the supplied location.
+ * <p></p>
+ * The algorithm is such that a square is created, with the specified location at the center, with
+ * sides of length 'manhattan distance'. This square, however, does not contain locations that are
+ * within the manhattan distance of the center square. Therefore, this is a little lazy and there is
+ * logic for advancing the iterator to a valid neighbor location.
  */
 @SuppressWarnings("PMD.BeanMembersShouldSerialize")
-public class NeighborCellIterator implements Iterator<Cell> {
+public class NeighborIterator implements Iterator<Location> {
 
   private Neighborhood neighborhood;
 
@@ -27,8 +32,8 @@ public class NeighborCellIterator implements Iterator<Cell> {
    * @param neighborThreshold distance from center cell. If a cell is within this distance to the
    *                          center cell, then it will be returned by this iterator
    */
-  public NeighborCellIterator(Neighborhood neighborhood, Location centerLocation,
-                              int neighborThreshold) {
+  public NeighborIterator(Neighborhood neighborhood, Location centerLocation,
+                          int neighborThreshold) {
     this.neighborhood = neighborhood;
     this.centerLocation = centerLocation;
     this.neighborThreshold = neighborThreshold;
@@ -50,10 +55,10 @@ public class NeighborCellIterator implements Iterator<Cell> {
   }
 
   @Override
-  public Cell next() {
+  public Location next() {
     Location location = new Location(currentX, currentY);
     advanceCursor();
-    return neighborhood.getCellAtLocation(location);
+    return location;
   }
 
   private boolean hasMorePossibleNeighbors() {

@@ -66,8 +66,8 @@ public class NeighborhoodTest {
                                                           int value) {
     Neighborhood neighborhood = new Neighborhood(width, height);
     Location testLocation = new Location(x, y);
-    neighborhood.getCellAtLocation(testLocation).setValue(value);
-    assertEquals(value, neighborhood.getCellAtLocation(testLocation).getValue());
+    neighborhood.setValueAtLocation(testLocation, value);
+    assertEquals(value, neighborhood.getValueAtLocation(testLocation));
   }
 
 }

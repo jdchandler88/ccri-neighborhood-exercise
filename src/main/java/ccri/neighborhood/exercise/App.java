@@ -5,11 +5,8 @@
 package ccri.neighborhood.exercise;
 
 public class App {
-  public String getGreeting() {
-    return "Hello world.";
-  }
-
   public static void main(String[] args) {
-    System.out.println(new App().getGreeting());
+    System.out.println("Please run \"gradle clean build\" to execute the neighborhood code. This " +
+        "will execute tests and generate code quality reports.");
   }
 }

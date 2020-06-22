@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.Iterator;
 import org.junit.jupiter.api.Test;
 
-public class NeighborCellIteratorTest {
+public class NeighborIteratorTest {
 
   /**
    * Verifies that a cell with a positive value within a 5x5 neighborhood returns the correct number
@@ -23,7 +23,7 @@ public class NeighborCellIteratorTest {
         .withValueAtLocation(new Location(2, 2), 1)
         .build();
 
-    Iterator<Cell> neighborIterator = neighborhood.neighborIterator(new Location(2, 2), 2);
+    Iterator<Location> neighborIterator = neighborhood.neighborIterator(new Location(2, 2), 2);
 
     int count = 0;
     while (neighborIterator.hasNext()) {

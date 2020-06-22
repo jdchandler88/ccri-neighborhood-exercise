@@ -3,6 +3,13 @@ This repository contains a solution to the CCRi Grid-Cell Neighborhood problem
 
 See the problem [here](Counting_grid-cell_neighborhoods.pdf).
 
+## Assumptions
+* You have a Java JVM installed that supports Gradle
+* You have Gradle installed
+  * If you don't have Gradle installed, then replace "gradle" with:  
+    * Windows: gradlew.bat
+    * Linux: gradlew
+
 ## Running the app
 The only execution of this code is currently through tests. To run tests, use ```gradle clean build``` and view the 
 output on the console.
@@ -24,7 +31,20 @@ JaCoCo generates code coverage data based on execution. For this project, unit t
 project is configured to automatically generate a coverage report after tests execute. To execute tests and gather a
 coverage report, run ```gradle test``` 
 
-The code coverage report is located at *<gradle_project_dir>/build/reports/jacoco/test/html/*.
+The code coverage report is located at *<gradle_project_dir>/build/reports/jacoco/test/html/*
 
-## PMD 
-PMD is another static code analysis tool. See https://pmd.github.io/. This project is configured to run PMD for 
+### PMD 
+PMD is another static code analysis tool. See https://pmd.github.io/. PMD will analyze the main source code and will 
+skip analyzing test source. To execute PMD, run ```gradle pmdMain```.
+
+The PMD report is located at *<gradle_project_dir>/build/reports/pmd/*
+
+### Checkstyle
+The project is configured to execute Checkstyle on main and test source code. Google's Java style guide is applied via 
+use of Checkstyle. To execute Checkstyle use either ```gradle checkstyleMain``` or ```gradle checkstyleTest```.
+
+The Checkstyle reports are located at *<gradle_project_dir>/build/reports/checkstyle/*
+
+## Documentation
+To generate HTML Javadocs, run ```gradle javadoc```. The output will be located at: 
+*<gradle_project_dir>/build/reports/*

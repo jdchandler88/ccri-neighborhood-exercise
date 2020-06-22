@@ -39,11 +39,11 @@ public class NeighborhoodBuilderTest {
             .withValueAtLocation(new Location(4, 4), 1);
     Neighborhood neighborhood = builder.build();
     assertAll(
-        () -> assertEquals(1, neighborhood.getCellAtLocation(new Location(0, 0)).getValue()),
-        () -> assertEquals(1, neighborhood.getCellAtLocation(new Location(1, 1)).getValue()),
-        () -> assertEquals(1, neighborhood.getCellAtLocation(new Location(2, 2)).getValue()),
-        () -> assertEquals(1, neighborhood.getCellAtLocation(new Location(3, 3)).getValue()),
-        () -> assertEquals(1, neighborhood.getCellAtLocation(new Location(4, 4)).getValue())
+        () -> assertEquals(1, neighborhood.getValueAtLocation(new Location(0, 0))),
+        () -> assertEquals(1, neighborhood.getValueAtLocation(new Location(1, 1))),
+        () -> assertEquals(1, neighborhood.getValueAtLocation(new Location(2, 2))),
+        () -> assertEquals(1, neighborhood.getValueAtLocation(new Location(3, 3))),
+        () -> assertEquals(1, neighborhood.getValueAtLocation(new Location(4, 4)))
     );
   }
 

@@ -2,18 +2,31 @@ package ccri.neighborhood.exercise;
 
 import java.util.Iterator;
 
+/**
+ * Iterator that iterates over every location in the neighborhood.
+ */
 @SuppressWarnings("PMD.BeanMembersShouldSerialize")
-public class NeighborhoodCellIterator implements Iterator<Cell> {
+public class NeighborhoodIterator implements Iterator<Location> {
 
   private Neighborhood neighborhood;
+
   private Location currentLocation;
 
-  NeighborhoodCellIterator(Neighborhood neighborhood, Location beginLocation) {
+  /**
+   * Creates a NeighborhoodIterator with the specified neighborhood and beginning location.
+   * @param neighborhood the neighborhood to iterate
+   * @param beginLocation location with which iterator should start
+   */
+  NeighborhoodIterator(Neighborhood neighborhood, Location beginLocation) {
     this.neighborhood = neighborhood;
     this.currentLocation = beginLocation;
   }
 
-  NeighborhoodCellIterator(Neighborhood neighborhood) {
+  /**
+   * Creates a NeighborhoodIterator with the specified neighborhood.
+   * @param neighborhood neighborhood to iterate
+   */
+  NeighborhoodIterator(Neighborhood neighborhood) {
     this(neighborhood, new Location(0, 0));
   }
 
@@ -26,7 +39,7 @@ public class NeighborhoodCellIterator implements Iterator<Cell> {
   }
 
   @Override
-  public Cell next() {
+  public Location next() {
     //get location for current iterator position
     Location location = this.currentLocation;
     //advance iterator
@@ -35,7 +48,7 @@ public class NeighborhoodCellIterator implements Iterator<Cell> {
     } else {
       moveIteratorToNextColumnInRow();
     }
-    return neighborhood.getCellAtLocation(location);
+    return location;
   }
 
   private boolean isAtEndOfRow() {
